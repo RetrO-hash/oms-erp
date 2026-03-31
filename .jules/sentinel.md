@@ -1,0 +1,4 @@
+## 2024-05-19 - [Hardcoded secret in Gateway Endpoint]
+**Vulnerability:** A hardcoded default secret (`"skyer"`) was present in `MaintainProperties.java` for the `/maintain` endpoint of the gateway. This allowed unauthenticated users to modify the gateway's maintenance state, posing an admin authorization bypass.
+**Learning:** Default configuration values should not act as fallback authentication secrets, particularly for maintenance endpoints, otherwise environments that forget to specify it are instantly compromised.
+**Prevention:** Remove default secrets. Unconfigured secrets should fall back to securely generated runtime keys or application startup failure.
