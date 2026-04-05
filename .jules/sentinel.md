@@ -1,0 +1,4 @@
+## 2024-05-18 - [Hardcoded Fallback Secrets in application.yml]
+**Vulnerability:** Spring Boot application.yml files contained hardcoded fallback values for sensitive properties like database passwords, Redis passwords, and OAuth RSA keys (e.g., ${SPRING_DATASOURCE_PASSWORD:123456}).
+**Learning:** Hardcoded fallbacks in configuration files are a common anti-pattern. If the environment variables are not set during deployment, the application silently falls back to these insecure defaults, which are committed in source control and exposed to everyone with repository access. This pattern undermines the secure externalization of configuration.
+**Prevention:** Always use empty string fallbacks (e.g., ${SECRET:}) or omit the fallback entirely, forcing the deployment pipeline to inject proper secrets or fail fast. Never commit default passwords or cryptographic keys.
