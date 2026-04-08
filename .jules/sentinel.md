@@ -1,0 +1,4 @@
+## 2024-05-24 - [CRITICAL] Externalize Hardcoded Third-Party API Credentials
+**Vulnerability:** Found hardcoded third-party API credentials (`key` and `secret` for `baison` integration) in `skyer-order/src/main/resources/application.yml`. Storing secrets in source code repositories is a critical vulnerability that exposes sensitive access keys to anyone with access to the code.
+**Learning:** Spring Boot configuration files (`application.yml`) are often used to define properties, and it is a common anti-pattern to hardcode secrets directly into these files during development or testing, which then make it to production.
+**Prevention:** Always externalize sensitive information such as database passwords, API keys, and JWT secrets using environment variables (e.g., `${BAISON_KEY:}`). Ensure no plaintext fallback values are provided in the source files, to force configuration from the environment securely.
