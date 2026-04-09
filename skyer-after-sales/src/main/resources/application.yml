@@ -4,7 +4,7 @@ spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://192.168.124.199:3306/skyer_after_sales?useUnicode=true&characterEncoding=utf-8&useSSL=false}
     username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:123456}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     hikari:
       # 连接池最小空闲连接数
       minimum-idle: ${SPRING_DATASOURCE_MINIMUM_IDLE:20}
@@ -106,8 +106,8 @@ skyer:
       enable: ${SKYER_REGIST_ENTITY_ENABLE:false}
     # 公钥和私钥
     encrypt:
-      public-key: ${SKYER_OAUTH_PASSWORD_PUBLIC_KEY:MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIPdTZ1b9Q13Y2YmZ4mjQnFpypCqhV6rjGgsTQMYqC0eVu/je3/L98/4/j3lNePWqwHgCDD0mxISFm44nDKfPbcCAwEAAQ==}
-      private-key: ${SKYER_OAUTH_PASSWORD_PRIVATE_KEY:MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAg91NnVv1DXdjZiZniaNCcWnKkKqFXquMaCxNAxioLR5W7+N7f8v3z/j+PeU149arAeAIMPSbEhIWbjicMp89twIDAQABAkAYAgbLi56GISJ7yqo3KP5D39r9k85MejdKECbFVYvpCsLG51IrwtVcdGJTExmkzIuOWnwqRAYUjpQnVvPvLzZhAiEA/Dyk4j+XZtC7NVxrXjn+PHG0vWZ8x14G5sBL6RfgzEsCIQCF1O0383YF0BbDUGkBoaVGmEc3H0D7FQF5L4gMe5EYxQIgLljOSyw4G5I68+EZcWTijCSweyS7xL5IMlofGKNkkOUCIC+hqdAZEW9eMUvQaZ8QBf/LIMWIlRsHzd9wwE4ZCHo1AiEAqsUlDIIfPOrjQfbeYVWSD+Ac9PzMiFfH9H/WMuaWRtw=}
+      public-key: ${SKYER_OAUTH_PASSWORD_PUBLIC_KEY}
+      private-key: ${SKYER_OAUTH_PASSWORD_PRIVATE_KEY}
   data:
     permission:
       db-owner: ${SKYER_DB_OWNER:}
