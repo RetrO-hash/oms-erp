@@ -1,0 +1,6 @@
+## 2024-05-15 - Hardcoded Secrets in YAML configs and Java Property classes
+**Vulnerability:** Found hardcoded secrets for third-party API keys (Baison) and system secrets (JWT key, maintain secret key, signature secret) scattered in `application.yml` files (`skyer-order`, `skyer-gateway`) and Java configuration classes (`MaintainProperties`). Some of these configs were also checked in with highly specific hexadecimal keys.
+**Learning:** In Spring Boot microservices, secrets are sometimes redundantly hardcoded both in `application.yml` and directly as default field values in `@ConfigurationProperties` classes (e.g. `private String secretKey = "skyer";`). This is a dual threat as a leak can occur from either location. Relying on default "dev" values in production codebase often leads to them being forgotten and utilized in live deployments.
+**Prevention:**
+1. Use Spring's property placeholder with NO fallback for sensitive values (e.g., `${SECRET_KEY:}` not `${SECRET_KEY:default_value}`).
+2. Do NOT initialize secret fields with default values in `@ConfigurationProperties` Java classes. They should default to null, forcing the application deployment environment to explicitly provide them (e.g. via Vault, K8s Secrets, or env vars).
