@@ -1,0 +1,4 @@
+## 2024-10-24 - [Remove Hardcoded Baison API Secrets]
+**Vulnerability:** Found hardcoded third-party API credentials (`key` and `secret`) for the "baison" service in `skyer-order/src/main/resources/application.yml`.
+**Learning:** Hardcoded credentials in configuration files pose a severe security risk if the repository is exposed or accessed by unauthorized personnel. Hardcoded fallbacks in environment variables are also an anti-pattern as they defeat the purpose of externalized configuration.
+**Prevention:** Always use environment variables without hardcoded fallbacks (e.g., `${SECRET_KEY:}`) for all API keys, secrets, and sensitive configuration properties in `application.yml` and other config files. Default to empty or null if the variable is missing to ensure it's explicitly set by the environment.
