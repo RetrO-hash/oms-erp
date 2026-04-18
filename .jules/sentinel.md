@@ -1,0 +1,4 @@
+## 2024-04-18 - [Fix Hardcoded Secrets in ConfigurationProperties]
+**Vulnerability:** A hardcoded secret string "skyer" was present in `MaintainProperties.java` as a default value and in `application.yml` as a fallback.
+**Learning:** For `@ConfigurationProperties` classes, setting a hardcoded default string in the code bypasses any secure random generation logic if the configuration value is missing. Fallbacks in `application.yml` also represent hardcoded secrets.
+**Prevention:** Always set default values for secret properties to `null` in Java classes and ensure `application.yml` does not use hardcoded fallbacks for secrets (e.g., use `${SECRET_KEY:}` instead).
