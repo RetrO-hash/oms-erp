@@ -1,0 +1,4 @@
+## 2024-05-20 - Hardcoded API Secrets in Configuration Files
+**Vulnerability:** Found hardcoded `baison` keys and secrets (`BSAKdNqtdUAnM66sNkdu`, `BSAKjQs5ENjsWqm80mmZ`) in `skyer-order/src/main/resources/application.yml`. Hardcoding credentials in source code exposes them to anyone with read access to the repository, leading to potential unauthorized access to integrated external services.
+**Learning:** Third-party integrations often require sensitive credentials. It's crucial to resist the temptation of placing these directly in configuration files, even during development or testing.
+**Prevention:** Always externalize configuration secrets using environment variables (e.g., `${BAISON_KEY:}`). Ensure no default fallback values contain real secrets. Configuration management systems or secret stores should inject these variables during deployment.
