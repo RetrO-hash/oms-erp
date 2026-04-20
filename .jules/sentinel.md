@@ -1,0 +1,4 @@
+## 2024-04-20 - Hardcoded Baison API Keys in application.yml
+**Vulnerability:** Found hardcoded Baison API url, key, and secret (`url: "http://39.100.129.141/e3_test/webopm/web/?app_act=api/ec&app_mode=func"`, `key: "BSAKdNqtdUAnM66sNkdu"`, `secret: "BSAKjQs5ENjsWqm80mmZ"`) in `skyer-order/src/main/resources/application.yml`.
+**Learning:** Development API keys or third-party service integration credentials should never be committed directly to configuration files, as they expose the system and the integrated service to unauthorized access. Always use environment variables without fallback for secrets.
+**Prevention:** Use Spring's property resolution with environment variable placeholders (e.g. `${BAISON_KEY:}`) and populate them securely in the deployment environment. Ensure default fallbacks are either null or empty.
