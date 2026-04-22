@@ -1,0 +1,4 @@
+## 2026-04-22 - Spring Boot Application Hardcoded Secrets Fallback
+**Vulnerability:** Found multiple hardcoded default fallbacks for secrets like database passwords (`SPRING_DATASOURCE_PASSWORD:123456`) and JWT keys (`jwt-key: skyer`) in `application.yml` and default hardcoded values in `@ConfigurationProperties` classes (e.g. `MaintainProperties`).
+**Learning:** Spring configuration files and Java config classes often contain hardcoded default string values meant for local testing. If secrets are not passed in via environment variables, these weak fallback defaults are activated, leading to a serious vulnerability where credentials are deterministic.
+**Prevention:** Avoid defining default fallbacks for secrets. Either use empty strings (e.g., `${SECRET_KEY:}`) or do not define a default at all (leaving fields `null` in configuration properties classes). This ensures that misconfigurations result in immediate failures instead of fallback compromises.
