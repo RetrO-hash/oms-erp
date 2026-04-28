@@ -1,0 +1,4 @@
+## 2024-04-28 - Hardcoded Secrets in Configuration
+**Vulnerability:** Found hardcoded credentials and secrets across multiple microservices in `application.yml`. Includes `SPRING_DATASOURCE_PASSWORD`, `SPRING_REDIS_PASSWORD`, `SKYER_OAUTH_PASSWORD_PRIVATE_KEY` and third-party API keys (e.g. Baison client in skyer-order).
+**Learning:** Development environments often use hardcoded fallback values for environment variables in Spring configurations (`${VAR:fallback_value}`) or directly set keys in code/config. This allows secrets to be committed to version control and risks exposing them.
+**Prevention:** Do not hardcode secret values. Use environment variables exclusively (`${VAR:}`) or retrieve them via a secure vault or configuration server. For Java applications, `@Value` and `@ConfigurationProperties` should not have hardcoded defaults for sensitive info.
