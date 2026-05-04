@@ -51,7 +51,7 @@ public class MaintainEndpoint {
 
         // 区分大小写
         if (!configKey.equals(secretKey)) {
-            throw new RuntimeException("认证失败，[secretKey=" + secretKey + "]不通过");
+            throw new RuntimeException("认证失败"); // Security fix: Do not reflect user input in error messages
         }
         if (openAll) {
             maintainProperties.setGlobalInfo(
