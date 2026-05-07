@@ -1,0 +1,4 @@
+## 2024-05-08 - [CRITICAL] Hardcoded Secrets in Application Configuration
+**Vulnerability:** Found hardcoded fallback values for database passwords, Redis passwords, and OAuth RSA keys in multiple `application.yml` files (e.g., `${SPRING_DATASOURCE_PASSWORD:123456}`, `${SKYER_OAUTH_PASSWORD_PRIVATE_KEY:MIIBVAIB...}`).
+**Learning:** Spring Boot's property placeholder syntax `${PROPERTY:default_value}` was used to inject secrets, but providing sensitive default values exposes these secrets to anyone with access to the codebase or its history.
+**Prevention:** Always externalize secrets using environment variables without hardcoded fallbacks (e.g., `${SPRING_DATASOURCE_PASSWORD:}`). Ensure that any default configurations in Java classes using `@ConfigurationProperties` are explicitly set to `null` instead of hardcoded sensitive strings, preventing accidental overriding of secure environments.
