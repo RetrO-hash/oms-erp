@@ -150,9 +150,9 @@ skyer:
     enable: true
 
 baison:
-  url: "http://39.100.129.141/e3_test/webopm/web/?app_act=api/ec&app_mode=func"
-  key: "BSAKdNqtdUAnM66sNkdu"
-  secret: "BSAKjQs5ENjsWqm80mmZ"
+  url: ${BAISON_URL:}
+  key: ${BAISON_KEY:}
+  secret: ${BAISON_SECRET:}
   param: "key=%s&requestTime=%s&secret=%s&version=3.0&serviceType=%s&data=%s"
   request-time-format: "yyyyMMddHHmmss"
   version: "3.0"
