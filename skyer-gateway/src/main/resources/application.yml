@@ -284,7 +284,6 @@ skyer:
       oauth:
         state: NORMAL
     # 运维接口密钥，不配置则在程序启动时生成随机key
-    secret-key: skyer
   request:
     counter:
       # http请求监控
