@@ -236,9 +236,9 @@ skyer:
       signature:
         enabled: false
         secrets:
-          - secretId: skyer
-            secretKey: 537509248a3da7804d12905c102d14cd1bec000797a6178a7353a4c3ac23a0b3
-      jwt-key: skyer # jwt的密钥
+          - secretId: ${SKYER_API_SIGNATURE_ID:}
+            secretKey: ${SKYER_API_SIGNATURE_SECRET:}
+      jwt-key: ${SKYER_GATEWAY_JWT_KEY:} # jwt的密钥
       # 是否打印 JWT
       enabled-jwt-log: ${SKYER_GATEWAY_HELPER_ENABLE_JWT_LOG:false}
       filter:
@@ -284,7 +284,7 @@ skyer:
       oauth:
         state: NORMAL
     # 运维接口密钥，不配置则在程序启动时生成随机key
-    secret-key: skyer
+    secret-key: ${SKYER_MAINTAIN_SECRET_KEY:}
   request:
     counter:
       # http请求监控
