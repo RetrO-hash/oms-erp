@@ -1,0 +1,4 @@
+## 2024-05-15 - Hardcoded Default Secrets in Configuration Classes
+**Vulnerability:** The `MaintainProperties` class in `skyer-gateway` contains a hardcoded default `secretKey = "skyer"`. This could allow unauthorized access to maintenance operations if the key is not explicitly overridden in configuration.
+**Learning:** Default values in `@ConfigurationProperties` classes can lead to security vulnerabilities if they provide a predictable, hardcoded secret. Spring Boot will use these defaults if no configuration property is provided.
+**Prevention:** Avoid setting hardcoded default values for security-sensitive fields (like secrets, keys, or passwords) in `@ConfigurationProperties` classes. Leave them as `null` and enforce configuration via environment variables or external configuration sources.
