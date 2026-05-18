@@ -19,7 +19,7 @@ public class MaintainProperties {
     /**
      * 运维请求 secretKey
      */
-    private String secretKey = "skyer";
+    private String secretKey;
 
     private MaintainInfo globalInfo = new MaintainInfo(MaintainState.NORMAL);
 
