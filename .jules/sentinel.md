@@ -1,0 +1,5 @@
+
+## 2024-05-18 - Hardcoded Maintain Secret Key in Configuration Properties
+**Vulnerability:** A hardcoded fallback string `"skyer"` was being used for the `secretKey` property in both the `MaintainProperties` Java class and the `application.yml` file within the API gateway. This allowed access to the `/maintain` endpoint, which alters the state of the API Gateway, by anyone who knows the source code default.
+**Learning:** Default configuration properties containing secrets must not use hardcoded strings (e.g. `private String secretKey = "skyer";` or `secret-key: skyer`). Hardcoded secrets can easily override secure configurations and are visible in source control, posing a significant security risk.
+**Prevention:** Always externalize secrets using environment variables without hardcoded string fallbacks (e.g. `secret-key: ${MAINTAIN_SECRET_KEY:}`). Ensure default field values in `@ConfigurationProperties` classes are `null` or appropriately empty to allow for random secret generation to proceed as intended by the endpoint logic.
