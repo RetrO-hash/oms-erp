@@ -1,0 +1,5 @@
+
+## 2024-05-27 - [CRITICAL] Hardcoded RSA Keys in Configuration Properties
+**Vulnerability:** Found hardcoded RSA public and private keys (`publicKey` and `privateKey`) embedded as default string values in several `@ConfigurationProperties` classes (e.g., `ChannelProperties.java`, `TagsProperties.java`, `OrderProperties.java`, `StockProperties.java`, `GoodsProperties.java`, `AfterSalesProperties.java`).
+**Learning:** Hardcoding sensitive encryption keys directly into the source code exposes them to anyone with repository access. When using `@ConfigurationProperties` to bind properties from files (like `application.yml` or environmental variables), setting explicit string defaults inside the class bypasses external configurations if they are not explicitly defined, falling back to a known exposed secret.
+**Prevention:** Never provide hardcoded secrets as default values in configuration classes. Instead, let them default to `null` so the system fails fast if the keys are not explicitly provided via secure configuration management (like environment variables or vault).
