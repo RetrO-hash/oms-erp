@@ -1,0 +1,4 @@
+## 2024-05-31 - [Hardcoded Secrets and Information Leakage in Gateway MaintainEndpoint]
+**Vulnerability:** A hardcoded `secretKey` default was defined in `MaintainProperties.java`, which defeated the secure random UUID generation fallback. Furthermore, the `MaintainEndpoint` reflected the user-supplied `secretKey` back in a `RuntimeException` message if authentication failed, creating an information leakage and log forging risk. Additionally, hardcoded credentials were kept in `application.yml`.
+**Learning:** Default values in `@ConfigurationProperties` classes can override secure initialization logic (like UUID generation). Exception messages should not reflect raw user input for authentication tokens/keys.
+**Prevention:** Avoid assigning hardcoded default values to secure properties in configuration classes—leave them uninitialized (null) to allow fallback logic to handle them securely. Always use generic, sanitized messages for authentication exceptions.
