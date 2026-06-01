@@ -1,0 +1,4 @@
+## 2024-05-15 - Hardcoded API Credentials in application.yml
+**Vulnerability:** The `application.yml` file in `skyer-order` contained hardcoded API URLs, keys, and secrets for the "baison" external service.
+**Learning:** These sensitive values can be checked into source control and exposed to anyone with access to the code. Developers sometimes use plain text strings for quick testing or out of convenience but forget to externalize them.
+**Prevention:** Always use Spring's property placeholders with environment variables (e.g., `${BAISON_KEY:}`) with empty or secure fallbacks to ensure secrets are injected at runtime and never committed to the repository. Ensure all API integrations are reviewed for hardcoded credentials.
