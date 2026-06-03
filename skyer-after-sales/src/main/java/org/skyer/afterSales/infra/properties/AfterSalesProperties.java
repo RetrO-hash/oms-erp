@@ -89,12 +89,12 @@ public class AfterSalesProperties {
          * 密码加密公钥
          */
         private String publicKey =
-                        "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIPdTZ1b9Q13Y2YmZ4mjQnFpypCqhV6rjGgsTQMYqC0eVu/je3/L98/4/j3lNePWqwHgCDD0mxISFm44nDKfPbcCAwEAAQ==";
+                        null;
         /**
          * 密码加密私钥
          */
         private String privateKey =
-                        "MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAg91NnVv1DXdjZiZniaNCcWnKkKqFXquMaCxNAxioLR5W7+N7f8v3z/j+PeU149arAeAIMPSbEhIWbjicMp89twIDAQABAkAYAgbLi56GISJ7yqo3KP5D39r9k85MejdKECbFVYvpCsLG51IrwtVcdGJTExmkzIuOWnwqRAYUjpQnVvPvLzZhAiEA/Dyk4j+XZtC7NVxrXjn+PHG0vWZ8x14G5sBL6RfgzEsCIQCF1O0383YF0BbDUGkBoaVGmEc3H0D7FQF5L4gMe5EYxQIgLljOSyw4G5I68+EZcWTijCSweyS7xL5IMlofGKNkkOUCIC+hqdAZEW9eMUvQaZ8QBf/LIMWIlRsHzd9wwE4ZCHo1AiEAqsUlDIIfPOrjQfbeYVWSD+Ac9PzMiFfH9H/WMuaWRtw=";
+                        null;
 
 
         public String getPublicKey() {
