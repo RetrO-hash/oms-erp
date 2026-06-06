@@ -3,8 +3,8 @@ spring:
     name: skyer-gateway
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://192.168.124.199:3306/skyer_platform?useUnicode=true&characterEncoding=utf-8&useSSL=false}
-    username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:123456}
+    username: ${SPRING_DATASOURCE_USERNAME:}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
     hikari:
       # 连接池最小空闲连接数
       minimum-idle: ${SPRING_DATASOURCE_MINIMUM_IDLE:20}
@@ -237,8 +237,8 @@ skyer:
         enabled: false
         secrets:
           - secretId: skyer
-            secretKey: 537509248a3da7804d12905c102d14cd1bec000797a6178a7353a4c3ac23a0b3
-      jwt-key: skyer # jwt的密钥
+            secretKey: ${SKYER_GATEWAY_SECRET_KEY:}
+      jwt-key: ${SKYER_GATEWAY_JWT_KEY:} # jwt的密钥
       # 是否打印 JWT
       enabled-jwt-log: ${SKYER_GATEWAY_HELPER_ENABLE_JWT_LOG:false}
       filter:
@@ -284,7 +284,7 @@ skyer:
       oauth:
         state: NORMAL
     # 运维接口密钥，不配置则在程序启动时生成随机key
-    secret-key: skyer
+    secret-key: ${SKYER_GATEWAY_MAINTAIN_SECRET:}
   request:
     counter:
       # http请求监控
