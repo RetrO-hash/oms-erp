@@ -76,7 +76,7 @@ public class GateWayHelperFilter implements WebFilter {
 
             ServerHttpResponse res = exchange.getResponse();
             StringBuilder responseMessage = new StringBuilder().append("<error>").append("<status>500</status>")
-                            .append("<code>GATEWAY_ERROR</code>").append("<message>").append(e.getMessage())
+                            .append("<code>GATEWAY_ERROR</code>").append("<message>").append("Internal Gateway Error")
                             .append("</message>").append("</error>");
 
             res.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);

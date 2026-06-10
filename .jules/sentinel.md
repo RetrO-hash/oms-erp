@@ -1,0 +1,4 @@
+## 2024-06-11 - Information Leakage in Gateway Error Responses
+**Vulnerability:** The GatewayHelperFilter was directly appending raw exception messages (`e.getMessage()`) into the XML response body returned to the client when an IOException occurred during helper authentication.
+**Learning:** Returning raw exception messages to the client violates the "fail securely" principle. It can inadvertently leak sensitive system details, stack traces, or internal server state, which attackers can use for further exploitation (like XSS if the exception message contains unsanitized user input, or information disclosure).
+**Prevention:** Always use generic, sanitized, and predictable error messages (e.g., "Internal Gateway Error") for client-facing API responses. Detailed error information should only be logged server-side for debugging purposes.
