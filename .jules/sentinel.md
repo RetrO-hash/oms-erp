@@ -1,0 +1,4 @@
+## 2024-06-11 - Remove Hardcoded Baison API Keys from application.yml
+**Vulnerability:** Third-party Baison API key and secret were hardcoded directly in `skyer-order/src/main/resources/application.yml`. If this code repository is exposed or compromised, an attacker would have access to these credentials and could exploit the associated external service, potentially leading to unauthorized access, data leaks, or billing abuses.
+**Learning:** Hardcoding credentials into standard configuration files is a common practice during early development or testing, but fails to adhere to secure software principles by embedding secrets alongside the application logic.
+**Prevention:** Store sensitive configurations and API credentials as environment variables (`${BAISON_KEY}`, `${BAISON_SECRET}`) within deployment environments, and avoid providing hardcoded default fallback values in configuration files to prevent unintended usage or leaks.
