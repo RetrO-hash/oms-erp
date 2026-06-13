@@ -1,0 +1,4 @@
+## 2024-05-24 - Hardcoded Secrets in Config and Code
+**Vulnerability:** Hardcoded database/redis passwords and RSA public/private keys were present as default values in `application.yml` (e.g., `${SPRING_DATASOURCE_PASSWORD:123456}`) and directly initialized in `@ConfigurationProperties` Java classes.
+**Learning:** Default fallbacks in Spring configuration and Java fields can expose sensitive secrets if the environment variables are not set. This allows anyone with read access to the source code to potentially access databases or impersonate services.
+**Prevention:** Always use environment variables without hardcoded fallbacks for secrets (e.g., `${SECRET_KEY}`). Ensure default field values for sensitive data in Java config classes are `null` to prevent accidental exposure or overriding of secure configurations.
