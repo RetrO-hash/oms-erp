@@ -50,8 +50,8 @@ public class MaintainEndpoint {
                     @RequestParam(value = "closeList", required = false) List<String> closeList) {
 
         // 区分大小写
-        if (!configKey.equals(secretKey)) {
-            throw new RuntimeException("认证失败，[secretKey=" + secretKey + "]不通过");
+        if (configKey == null || !configKey.equals(secretKey)) {
+            throw new RuntimeException("认证失败");
         }
         if (openAll) {
             maintainProperties.setGlobalInfo(
