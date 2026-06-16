@@ -1,0 +1,4 @@
+## 2024-05-24 - Removed hardcoded secrets from configuration files
+**Vulnerability:** Application configuration files (application.yml) contained hardcoded fallback passwords for database and Redis connections (e.g., `password: ${SPRING_DATASOURCE_PASSWORD:Ss110110}`). Helm values.yaml also contained hardcoded default passwords for the database connections.
+**Learning:** Default fallback values in Spring Boot configurations can act as hardcoded secrets, bypassing the intended externalization of sensitive data. If environment variables are not set, these insecure defaults are used, leading to potential unauthorized access.
+**Prevention:** Avoid defining default values for sensitive configurations like passwords and API keys in `application.yml` or `values.yaml`. Use empty fallbacks (e.g., `${SECRET:}`) or enforce that the application fails to start if essential secrets are not provided via environment variables.
