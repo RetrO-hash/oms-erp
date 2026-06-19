@@ -1,0 +1,4 @@
+## 2024-05-24 - [CRITICAL] Remove hardcoded secrets from config files
+**Vulnerability:** Found multiple hardcoded secrets in `application.yml` files, including database passwords (`SPRING_DATASOURCE_PASSWORD`), Redis passwords (`SPRING_REDIS_PASSWORD`), OAuth public/private keys (`SKYER_OAUTH_PASSWORD_PUBLIC_KEY`, `SKYER_OAUTH_PASSWORD_PRIVATE_KEY`), and other secrets like `secretKey` and `secret-key`. The previous configuration used default values in `${ENV_VAR:default_value}` which exposes the secrets.
+**Learning:** Default values in Spring environment variable expressions should not contain hardcoded secrets, as they could be used in production if environment variables are not set, and they are exposed in the repository.
+**Prevention:** Use `${ENV_VAR:}` (with an empty string as default) or simply `${ENV_VAR}` to force the environment variable to be provided.
