@@ -1,0 +1,4 @@
+## 2024-05-24 - Hardcoded Cryptographic Keys and Secrets in Configuration Classes
+**Vulnerability:** Hardcoded RSA public and private keys were found in multiple `@ConfigurationProperties` classes (`ChannelProperties`, `TagsProperties`, `OrderProperties`, `StockProperties`, `GoodsProperties`, `AfterSalesProperties`). Additionally, a hardcoded `secretKey` was found in `MaintainProperties`.
+**Learning:** Default field values in Java `@ConfigurationProperties` classes act as hardcoded fallbacks. If secrets are defined this way, they are compiled into the application, exposing them to anyone with access to the source code or binary, and they could override external configurations if not managed correctly.
+**Prevention:** Always leave default values for sensitive fields in `@ConfigurationProperties` classes as `null`. Ensure secrets are externalized and provided via environment variables or secure vault services at runtime.
