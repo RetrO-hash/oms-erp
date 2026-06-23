@@ -1,0 +1,4 @@
+## 2024-05-18 - Hardcoded BaiSon API Credentials in application.yml
+**Vulnerability:** Hardcoded `baison.key` and `baison.secret` credentials were found in `skyer-order/src/main/resources/application.yml`. Storing secrets in plain text configuration files is a critical security vulnerability that could lead to unauthorized access to the external BaiSon system if the codebase is exposed.
+**Learning:** External API credentials must never be committed to source control. They should be passed into the application securely at runtime.
+**Prevention:** Use environment variables or a secure configuration server (like Spring Cloud Config backed by Vault) to inject sensitive credentials. When using environment variables in Spring Boot properties, always provide a safe (e.g., empty) fallback if the application can start without them, or no fallback if it must fail fast, e.g. `${BAISON_KEY:}` or `${BAISON_KEY}`. Do not use actual credentials as fallbacks.
