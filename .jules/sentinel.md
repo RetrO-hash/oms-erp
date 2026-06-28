@@ -1,0 +1,4 @@
+## 2024-06-28 - Hardcoded API Key and Secret in application.yml
+**Vulnerability:** Found hardcoded third-party API keys (`baison.key` and `baison.secret`) in `skyer-order/src/main/resources/application.yml`.
+**Learning:** Hardcoded secrets in configuration files are a critical vulnerability as they expose sensitive information to anyone with access to the source code repository, potentially allowing unauthorized access to external systems.
+**Prevention:** Use environment variables (e.g., `${BAISON_KEY:}`) for all sensitive configuration properties without providing hardcoded fallback values. This ensures that secrets must be securely provided by the deployment environment.
