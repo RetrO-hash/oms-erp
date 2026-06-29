@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,8 +52,8 @@ public class MaintainEndpoint {
                     @RequestParam(value = "closeList", required = false) List<String> closeList) {
 
         // 区分大小写
-        if (!configKey.equals(secretKey)) {
-            throw new RuntimeException("认证失败，[secretKey=" + secretKey + "]不通过");
+        if (secretKey == null || !MessageDigest.isEqual(configKey.getBytes(StandardCharsets.UTF_8), secretKey.getBytes(StandardCharsets.UTF_8))) {
+            throw new RuntimeException("认证失败");
         }
         if (openAll) {
             maintainProperties.setGlobalInfo(
