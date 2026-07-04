@@ -49,9 +49,11 @@ public class MaintainEndpoint {
                     @RequestParam(value = "openList", required = false) List<String> openList,
                     @RequestParam(value = "closeList", required = false) List<String> closeList) {
 
-        // 区分大小写
-        if (!configKey.equals(secretKey)) {
-            throw new RuntimeException("认证失败，[secretKey=" + secretKey + "]不通过");
+        // 区分大小写，恒定时间比较防时序攻击，防日志注入/XSS
+        if (configKey == null || secretKey == null || !java.security.MessageDigest.isEqual(
+                configKey.getBytes(java.nio.charset.StandardCharsets.UTF_8),
+                secretKey.getBytes(java.nio.charset.StandardCharsets.UTF_8))) {
+            throw new RuntimeException("认证失败");
         }
         if (openAll) {
             maintainProperties.setGlobalInfo(
