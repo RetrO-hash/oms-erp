@@ -1,0 +1,4 @@
+## 2024-05-18 - Hardcoded BaiSon API Credentials in Application Properties
+**Vulnerability:** BaiSon API keys (`key` and `secret`) were hardcoded directly in `skyer-order/src/main/resources/application.yml` and bound using `@Value` without fallback mechanisms.
+**Learning:** Hardcoding secrets in YAML properties allows anyone with repository read access to view and use third-party API keys. Simply removing them without updating the `@Value` injection would cause application startup to fail due to missing configuration values. Additionally, empty string fallbacks (e.g. `${baison.key:}`) are insecure and can bypass null checks.
+**Prevention:** Externalize secrets using environment variables or a secrets manager. Ensure `@Value` properties have secure fallbacks like `#{null}` (e.g., `@Value("${baison.key:#{null}}")`) and always perform null checks before utilizing them in sensitive API calls to fail securely without leaking information.

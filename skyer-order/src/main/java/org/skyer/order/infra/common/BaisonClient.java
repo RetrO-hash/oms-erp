@@ -17,9 +17,9 @@ import java.util.concurrent.TimeUnit;
 public class BaisonClient {
     @Value("${baison.url}")
     private String url;
-    @Value("${baison.key}")
+    @Value("${baison.key:#{null}}")
     private String key;
-    @Value("${baison.secret}")
+    @Value("${baison.secret:#{null}}")
     private String secret;
     @Value("${baison.param}")
     private String param;
@@ -61,6 +61,11 @@ public class BaisonClient {
      * @return
      */
     public String sendPost(BaiSonServiceTypeEnum serviceType, String data) {
+        if (key == null || secret == null) {
+            log.error("BaiSon API credentials are not configured. Operation aborted securely.");
+            return "{\"error\":\"Configuration missing\"}";
+        }
+
         String dateFormat = DateUtil.format(new Date(), requestTimeFormat);
         String format = String.format(param, key, dateFormat, secret, serviceType.getTypeName(), data);
         String md5 = DigestUtil.md5Hex(format);
