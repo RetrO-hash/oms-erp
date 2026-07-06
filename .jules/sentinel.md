@@ -1,0 +1,4 @@
+## 2024-07-07 - Hardcoded Baison API Secrets
+**Vulnerability:** Hardcoded API key and secret for the Baison service were found in `skyer-order/src/main/resources/application.yml` and injected directly into `BaisonClient.java` without null checks.
+**Learning:** Hardcoding secrets exposes them to anyone with repository access. Using SpEL null fallbacks in `@Value` (e.g., `@Value("${baison.key:#{null}}")`) ensures the application can still startup if environment variables are missing, but requires explicit null checks before using them to prevent unexpected behavior and failing securely without leaking information.
+**Prevention:** Always use environment variables for sensitive data (e.g., `${BAISON_KEY}`). In Spring, omit the trailing colon (don't use `${BAISON_KEY:}`) so Spring doesn't inject an empty string, and handle the potential null value securely in the Java class.
